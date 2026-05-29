@@ -278,3 +278,4 @@ C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\refint\Gestion
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.pdb
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.genruntimeconfig.cache
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\ref\GestionStock.dll
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.sourcelink.json
