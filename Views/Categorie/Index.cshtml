@@ -1,0 +1,47 @@
+@model IEnumerable<Categorie>
+@{
+    ViewData["Title"] = "Catégories";
+}
+
+<h1>Catégories</h1>
+<a asp-action="Create">+ Nouvelle catégorie</a>
+
+<hr />
+
+@if (TempData["Erreur"] != null)
+{
+    <p style="color:red">@TempData["Erreur"]</p>
+}
+
+@if (!Model.Any())
+{
+    <p>Aucune catégorie trouvée.</p>
+}
+else
+{
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Nombre de produits</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var categorie in Model)
+            {
+                <tr>
+                    <td>@categorie.Nom</td>
+                    <td>@categorie.Description</td>
+                    <td>@categorie.Produits.Count</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@categorie.Id">Détails</a> |
+                        <a asp-action="Edit" asp-route-id="@categorie.Id">Modifier</a> |
+                        <a asp-action="Delete" asp-route-id="@categorie.Id">Supprimer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

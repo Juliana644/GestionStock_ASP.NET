@@ -1,0 +1,32 @@
+@model Categorie
+@{
+    ViewData["Title"] = "Supprimer la catégorie";
+}
+
+<h1>Supprimer cette catégorie ?</h1>
+
+<dl>
+    <dt>Nom</dt>
+    <dd>@Model.Nom</dd>
+
+    <dt>Description</dt>
+    <dd>@Model.Description</dd>
+
+    <dt>Nombre de produits</dt>
+    <dd>@Model.Produits.Count</dd>
+</dl>
+
+@if (Model.Produits.Any())
+{
+    <p style="color:red">
+        Attention : cette catégorie contient @Model.Produits.Count produit(s).
+        La suppression sera refusée.
+    </p>
+}
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Oui, supprimer</button>
+    <a asp-action="Index">Annuler</a>
+</form>

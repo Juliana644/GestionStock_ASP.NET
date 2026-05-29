@@ -1,0 +1,54 @@
+@model Categorie
+@{
+    ViewData["Title"] = "Détails de la catégorie";
+}
+
+<h1>@Model.Nom</h1>
+<a asp-action="Index">← Retour à la liste</a> |
+<a asp-action="Edit" asp-route-id="@Model.Id">Modifier</a>
+
+<hr />
+
+<dl>
+    <dt>Nom</dt>
+    <dd>@Model.Nom</dd>
+
+    <dt>Description</dt>
+    <dd>@Model.Description</dd>
+
+    <dt>Nombre de produits</dt>
+    <dd>@Model.Produits.Count</dd>
+</dl>
+
+<hr />
+
+<h2>Produits dans cette catégorie</h2>
+
+@if (!Model.Produits.Any())
+{
+    <p>Aucun produit dans cette catégorie.</p>
+}
+else
+{
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Référence</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var produit in Model.Produits)
+            {
+                <tr>
+                    <td>@produit.Reference</td>
+                    <td>@produit.Nom</td>
+                    <td>@produit.PrixUnitaire.ToString("N0") FCFA</td>
+                    <td>@produit.QuantiteEnStock</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

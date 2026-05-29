@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Produit>
+@{
+    ViewData["Title"] = "Tableau de bord";
+}
+
+<h1>Tableau de bord</h1>
+
+<p>Total produits : <strong>@ViewBag.TotalProduits</strong></p>
+<p>Total catégories : <strong>@ViewBag.TotalCategories</strong></p>
+<p>Total mouvements : <strong>@ViewBag.TotalMouvements</strong></p>
+<p>Produits en stock faible : <strong>@ViewBag.StockFaible</strong></p>
+
+<hr />
+
+<h2>Produits en stock critique</h2>
+
+@if (!Model.Any())
+{
+    <p>Aucun produit en stock critique.</p>
+}
+else
+{
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Référence</th>
+                <th>Nom</th>
+                <th>Catégorie</th>
+                <th>Stock</th>
+                <th>Seuil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var produit in Model)
+            {
+                <tr>
+                    <td>@produit.Reference</td>
+                    <td>@produit.Nom</td>
+                    <td>@produit.Categorie?.Nom</td>
+                    <td style="color:red">@produit.QuantiteEnStock</td>
+                    <td>@produit.SeuilAlerte</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} 

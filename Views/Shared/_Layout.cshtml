@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GestionStock</title>
+</head>
+<body>
+    <nav>
+        <a asp-controller="Home" asp-action="Index">Accueil</a> |
+        <a asp-controller="Produit" asp-action="Index">Produits</a> |
+        <a asp-controller="Categorie" asp-action="Index">Catégories</a>
+    </nav>
+
+    <hr />
+
+    <main>
+        @* Affichage des messages de succès (TempData) *@
+        @if (TempData["Succes"] != null)
+        {
+            <p style="color:green">@TempData["Succes"]</p>
+        }
+
+        @RenderBody()
+    </main>
+
+    <hr />
+    <footer>
+        <p>GestionStock &copy; @DateTime.Now.Year</p>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

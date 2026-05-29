@@ -1,0 +1,68 @@
+@model IEnumerable<Produit>
+@{
+    ViewData["Title"] = "Liste des produits";
+}
+
+<h1>Produits</h1>
+<a asp-action="Create">+ Nouveau produit</a>
+
+<hr />
+
+@* Formulaire de filtre *@
+<form method="get" asp-action="Index">
+    <input type="text" name="recherche" value="@ViewBag.Recherche" placeholder="Rechercher..." />
+
+<select name="categorieId" asp-items="ViewBag.Categories">
+    <option value="">-- Toutes les catégories --</option>
+</select>
+
+    <input type="checkbox" name="stockFaible" value="true"
+           @(ViewBag.StockFaible == true ? "checked" : "") />
+    <label>Stock faible seulement</label>
+
+    <button type="submit">Filtrer</button>
+    <a asp-action="Index">Réinitialiser</a>
+</form>
+
+<hr />
+
+@if (!Model.Any())
+{
+    <p>Aucun produit trouvé.</p>
+}
+else
+{
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Référence</th>
+                <th>Nom</th>
+                <th>Catégorie</th>
+                <th>Prix</th>
+                <th>Stock</th>
+                <th>Actif</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var produit in Model)
+            {
+                <tr>
+                    <td>@produit.Reference</td>
+                    <td>@produit.Nom</td>
+                    <td>@produit.Categorie?.Nom</td>
+                    <td>@produit.PrixUnitaire.ToString("N0") FCFA</td>
+                    <td @(produit.QuantiteEnStock <= produit.SeuilAlerte ? "style=color:red" : "")>
+                        @produit.QuantiteEnStock
+                    </td>
+                    <td>@(produit.Actif ? "Oui" : "Non")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@produit.Id">Détails</a> |
+                        <a asp-action="Edit" asp-route-id="@produit.Id">Modifier</a> |
+                        <a asp-action="Delete" asp-route-id="@produit.Id">Supprimer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

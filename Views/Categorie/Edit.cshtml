@@ -1,0 +1,32 @@
+@model Categorie
+@{
+    ViewData["Title"] = "Modifier la catégorie";
+}
+
+<h1>Modifier : @Model.Nom</h1>
+<a asp-action="Index">← Retour à la liste</a>
+
+<hr />
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <div asp-validation-summary="ModelOnly" style="color:red"></div>
+
+    <div>
+        <label asp-for="Nom"></label>
+        <input asp-for="Nom" />
+        <span asp-validation-for="Nom" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description" style="color:red"></span>
+    </div>
+
+    <hr />
+    <button type="submit">Enregistrer les modifications</button>
+    <a asp-action="Index">Annuler</a>
+</form>

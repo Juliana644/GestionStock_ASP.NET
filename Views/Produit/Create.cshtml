@@ -1,0 +1,71 @@
+@model Produit
+@{
+    ViewData["Title"] = "Nouveau produit";
+}
+
+<h1>Nouveau produit</h1>
+<a asp-action="Index">← Retour à la liste</a>
+
+<hr />
+
+<form asp-action="Create" method="post">
+    @* Token anti-CSRF généré automatiquement *@
+    @Html.AntiForgeryToken()
+
+    @* Affiche les erreurs globales du modèle *@
+    <div asp-validation-summary="ModelOnly" style="color:red"></div>
+
+    <div>
+        <label asp-for="Reference"></label>
+        <input asp-for="Reference" />
+        <span asp-validation-for="Reference" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="Nom"></label>
+        <input asp-for="Nom" />
+        <span asp-validation-for="Nom" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="PrixUnitaire"></label>
+        <input asp-for="PrixUnitaire" />
+        <span asp-validation-for="PrixUnitaire" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="QuantiteEnStock"></label>
+        <input asp-for="QuantiteEnStock" />
+        <span asp-validation-for="QuantiteEnStock" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="SeuilAlerte"></label>
+        <input asp-for="SeuilAlerte" />
+        <span asp-validation-for="SeuilAlerte" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="CategorieId"></label>
+        @* asp-items lie la liste déroulante au ViewBag.CategorieId *@
+        <select asp-for="CategorieId" asp-items="ViewBag.CategorieId">
+            <option value="">-- Choisir une catégorie --</option>
+        </select>
+        <span asp-validation-for="CategorieId" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="Actif"></label>
+        <input asp-for="Actif" type="checkbox" />
+    </div>
+
+    <hr />
+    <button type="submit">Enregistrer</button>
+    <a asp-action="Index">Annuler</a>
+</form>

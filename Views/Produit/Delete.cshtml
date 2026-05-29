@@ -1,0 +1,29 @@
+@model Produit
+@{
+    ViewData["Title"] = "Supprimer le produit";
+}
+
+<h1>Supprimer ce produit ?</h1>
+
+<p>Tu es sur le point de supprimer définitivement ce produit :</p>
+
+<dl>
+    <dt>Référence</dt>
+    <dd>@Model.Reference</dd>
+
+    <dt>Nom</dt>
+    <dd>@Model.Nom</dd>
+
+    <dt>Catégorie</dt>
+    <dd>@Model.Categorie?.Nom</dd>
+
+    <dt>Stock actuel</dt>
+    <dd>@Model.QuantiteEnStock</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Oui, supprimer</button>
+    <a asp-action="Index">Annuler</a>
+</form>
