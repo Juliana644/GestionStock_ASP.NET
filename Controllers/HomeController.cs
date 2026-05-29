@@ -2,41 +2,36 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GestionStock.Data;
+using GestionStock.Interfaces;
 using GestionStock.Models;
 
 namespace GestionStock.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly IProduitService _produitService;
+    private readonly ICategorieService _categorieService;
     private readonly ApplicationDbContext _context;
-    private readonly ILogger<HomeController> _logger;
 
-    // Le framework injecte automatiquement ApplicationDbContext et ILogger
-    public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
+    public HomeController(
+        IProduitService produitService,
+        ICategorieService categorieService,
+        ApplicationDbContext context)
     {
+        _produitService = produitService;
+        _categorieService = categorieService;
         _context = context;
-        _logger = logger;
     }
 
     public async Task<IActionResult> Index()
     {
-        // ViewBag : données simples passées à la vue (non typées)
-        ViewBag.TotalProduits = await _context.Produits.CountAsync();
-        ViewBag.TotalCategories = await _context.Categories.CountAsync();
+        ViewBag.TotalProduits = (await _produitService.GetAllAsync(null, null, null)).Count();
+        ViewBag.TotalCategories = (await _categorieService.GetAllAsync()).Count();
+        ViewBag.StockFaible = await _produitService.CountStockFaibleAsync();
         ViewBag.TotalMouvements = await _context.MouvementsStock.CountAsync();
-        ViewBag.StockFaible = await _context.Produits
-            .Where(p => p.QuantiteEnStock <= p.SeuilAlerte && p.Actif)
-            .CountAsync();
 
-        // Model : liste typée passée à la vue (produits critiques)
-        var produitsCritiques = await _context.Produits
-            .Include(p => p.Categorie)        // JOIN avec Categories
-            .Where(p => p.QuantiteEnStock <= p.SeuilAlerte && p.Actif)
-            .OrderBy(p => p.QuantiteEnStock)
-            .Take(5)
-            .ToListAsync();
-
-        return View(produitsCritiques);
+        var produitsCritiques = await _produitService.GetAllAsync(null, null, true);
+        return View(produitsCritiques.Take(5));
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
