@@ -1,3 +1,14 @@
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.csproj.AssemblyReference.cache
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.AssemblyInfoInputs.cache
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.AssemblyInfo.cs
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.csproj.CoreCompileInputs.cache
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.RazorAssemblyInfo.cache
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.RazorAssemblyInfo.cs
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.sourcelink.json
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\BuildHost-net472\Microsoft.Build.Locator.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\BuildHost-net472\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.exe
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\BuildHost-net472\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.exe.config
@@ -56,6 +67,7 @@ C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\GestionStock.p
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Humanizer.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.Build.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.Build.Framework.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.Build.Tasks.Core.dll
@@ -80,8 +92,10 @@ C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.Iden
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.NET.StringTools.dll
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Microsoft.OpenApi.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Mono.TextTemplating.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Newtonsoft.Json.dll
+C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\Scalar.AspNetCore.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\SQLitePCLRaw.batteries_v2.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\SQLitePCLRaw.core.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\SQLitePCLRaw.provider.e_sqlite3.dll
@@ -188,15 +202,6 @@ C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\runtimes\win-a
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\bin\Debug\net10.0\runtimes\win\lib\net9.0\System.Windows.Extensions.dll
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.csproj.AssemblyReference.cache
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\rpswa.dswa.cache.json
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.AssemblyInfoInputs.cache
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.AssemblyInfo.cs
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.csproj.CoreCompileInputs.cache
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.RazorAssemblyInfo.cache
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.RazorAssemblyInfo.cs
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -278,4 +283,3 @@ C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\refint\Gestion
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.pdb
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.genruntimeconfig.cache
 C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\ref\GestionStock.dll
-C:\Users\SD\Desktop\dotnetprojects\GestionStock\obj\Debug\net10.0\GestionStock.sourcelink.json

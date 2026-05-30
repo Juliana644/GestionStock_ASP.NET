@@ -1,7 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using GestionStock.Data;
 using GestionStock.Interfaces;
 using GestionStock.Models;
 
@@ -12,27 +11,24 @@ public class ProduitController : Controller
       private readonly IProduitService _produitService;
       private readonly ICategorieService _categorieService;
 
-      // Le conteneur DI injecte automatiquement les implémentations
       public ProduitController(IProduitService produitService, ICategorieService categorieService)
       {
             _produitService = produitService;
             _categorieService = categorieService;
       }
 
-      // GET /Produit
+      // GET /Produit — accessible à tous
       public async Task<IActionResult> Index(string? recherche, int? categorieId, bool? stockFaible)
       {
             var produits = await _produitService.GetAllAsync(recherche, categorieId, stockFaible);
-
             ViewBag.Recherche = recherche;
             ViewBag.CategorieId = categorieId;
             ViewBag.StockFaible = stockFaible;
             await ChargerCategories(categorieId);
-
             return View(produits);
       }
 
-      // GET /Produit/Details/5
+      // GET /Produit/Details/5 — accessible à tous
       public async Task<IActionResult> Details(int? id)
       {
             if (id == null) return NotFound();
@@ -41,14 +37,16 @@ public class ProduitController : Controller
             return View(produit);
       }
 
-      // GET /Produit/Create
+      // GET /Produit/Create — connectés seulement
+      [Authorize]
       public async Task<IActionResult> Create()
       {
             await ChargerCategories();
             return View();
       }
 
-      // POST /Produit/Create
+      // POST /Produit/Create — connectés seulement
+      [Authorize]
       [HttpPost]
       [ValidateAntiForgeryToken]
       public async Task<IActionResult> Create(
@@ -69,7 +67,8 @@ public class ProduitController : Controller
             return View(produit);
       }
 
-      // GET /Produit/Edit/5
+      // GET /Produit/Edit/5 — Admin seulement
+      [Authorize(Roles = "Admin")]
       public async Task<IActionResult> Edit(int? id)
       {
             if (id == null) return NotFound();
@@ -79,7 +78,8 @@ public class ProduitController : Controller
             return View(produit);
       }
 
-      // POST /Produit/Edit/5
+      // POST /Produit/Edit/5 — Admin seulement
+      [Authorize(Roles = "Admin")]
       [HttpPost]
       [ValidateAntiForgeryToken]
       public async Task<IActionResult> Edit(int id,
@@ -102,7 +102,8 @@ public class ProduitController : Controller
             return View(produit);
       }
 
-      // GET /Produit/Delete/5
+      // GET /Produit/Delete/5 — Admin seulement
+      [Authorize(Roles = "Admin")]
       public async Task<IActionResult> Delete(int? id)
       {
             if (id == null) return NotFound();
@@ -111,7 +112,8 @@ public class ProduitController : Controller
             return View(produit);
       }
 
-      // POST /Produit/Delete/5
+      // POST /Produit/Delete/5 — Admin seulement
+      [Authorize(Roles = "Admin")]
       [HttpPost, ActionName("Delete")]
       [ValidateAntiForgeryToken]
       public async Task<IActionResult> DeleteConfirmed(int id)

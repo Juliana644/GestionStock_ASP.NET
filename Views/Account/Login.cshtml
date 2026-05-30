@@ -1,0 +1,47 @@
+@model GestionStock.ViewModels.LoginDto
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white text-center">
+                <h4 class="mb-0">🔐 Connexion</h4>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Login" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" type="email" class="form-control"
+                               placeholder="votre@email.com" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mot de passe</label>
+                        <input asp-for="MotDePasse" type="password" class="form-control"
+                               placeholder="••••••••" />
+                        <span asp-validation-for="MotDePasse" class="text-danger small"></span>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input asp-for="Sesouvenir" type="checkbox" class="form-check-input" />
+                        <label asp-for="Sesouvenir" class="form-check-label">Se souvenir de moi</label>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-dark">Se connecter</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <small>Pas encore de compte ?
+                    <a asp-action="Register">S'inscrire</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>

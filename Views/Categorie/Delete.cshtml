@@ -1,32 +1,43 @@
-@model Categorie
+@model GestionStock.Models.Categorie
 @{
     ViewData["Title"] = "Supprimer la catégorie";
 }
 
-<h1>Supprimer cette catégorie ?</h1>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">🗑️ Supprimer cette catégorie ?</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tr><th>Nom</th><td>@Model.Nom</td></tr>
+                    <tr><th>Description</th><td>@Model.Description</td></tr>
+                    <tr><th>Nombre de produits</th><td>@Model.Produits.Count</td></tr>
+                </table>
 
-<dl>
-    <dt>Nom</dt>
-    <dd>@Model.Nom</dd>
-
-    <dt>Description</dt>
-    <dd>@Model.Description</dd>
-
-    <dt>Nombre de produits</dt>
-    <dd>@Model.Produits.Count</dd>
-</dl>
-
-@if (Model.Produits.Any())
-{
-    <p style="color:red">
-        Attention : cette catégorie contient @Model.Produits.Count produit(s).
-        La suppression sera refusée.
-    </p>
-}
-
-<form asp-action="Delete" method="post">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="Id" />
-    <button type="submit">Oui, supprimer</button>
-    <a asp-action="Index">Annuler</a>
-</form>
+                @if (Model.Produits.Any())
+                {
+                    <div class="alert alert-danger">
+                        ⛔ Cette catégorie contient <strong>@Model.Produits.Count</strong> produit(s).
+                        La suppression sera refusée.
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        ⚠️ Cette action est irréversible.
+                    </div>
+                }
+            </div>
+            <div class="card-footer d-flex gap-2">
+                <form asp-action="Delete" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+                </form>
+                <a asp-action="Index" class="btn btn-outline-secondary">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>

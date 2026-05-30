@@ -1,71 +1,76 @@
-@model Produit
+@model GestionStock.Models.Produit
 @{
     ViewData["Title"] = "Nouveau produit";
 }
 
-<h1>Nouveau produit</h1>
-<a asp-action="Index">← Retour à la liste</a>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">+ Nouveau produit</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-<hr />
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Reference" class="form-label"></label>
+                            <input asp-for="Reference" class="form-control" />
+                            <span asp-validation-for="Reference" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Nom" class="form-label"></label>
+                            <input asp-for="Nom" class="form-control" />
+                            <span asp-validation-for="Nom" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Description" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="PrixUnitaire" class="form-label"></label>
+                            <div class="input-group">
+                                <input asp-for="PrixUnitaire" class="form-control" />
+                                <span class="input-group-text">FCFA</span>
+                            </div>
+                            <span asp-validation-for="PrixUnitaire" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="QuantiteEnStock" class="form-label"></label>
+                            <input asp-for="QuantiteEnStock" class="form-control" />
+                            <span asp-validation-for="QuantiteEnStock" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="SeuilAlerte" class="form-label"></label>
+                            <input asp-for="SeuilAlerte" class="form-control" />
+                            <span asp-validation-for="SeuilAlerte" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="CategorieId" class="form-label"></label>
+                            <select asp-for="CategorieId" asp-items="ViewBag.CategorieId"
+                                    class="form-select">
+                                <option value="">-- Choisir une catégorie --</option>
+                            </select>
+                            <span asp-validation-for="CategorieId" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <div class="form-check">
+                                <input asp-for="Actif" type="checkbox" class="form-check-input" />
+                                <label asp-for="Actif" class="form-check-label">Actif</label>
+                            </div>
+                        </div>
+                    </div>
 
-<form asp-action="Create" method="post">
-    @* Token anti-CSRF généré automatiquement *@
-    @Html.AntiForgeryToken()
-
-    @* Affiche les erreurs globales du modèle *@
-    <div asp-validation-summary="ModelOnly" style="color:red"></div>
-
-    <div>
-        <label asp-for="Reference"></label>
-        <input asp-for="Reference" />
-        <span asp-validation-for="Reference" style="color:red"></span>
+                    <hr />
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <label asp-for="Nom"></label>
-        <input asp-for="Nom" />
-        <span asp-validation-for="Nom" style="color:red"></span>
-    </div>
-
-    <div>
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description"></textarea>
-        <span asp-validation-for="Description" style="color:red"></span>
-    </div>
-
-    <div>
-        <label asp-for="PrixUnitaire"></label>
-        <input asp-for="PrixUnitaire" />
-        <span asp-validation-for="PrixUnitaire" style="color:red"></span>
-    </div>
-
-    <div>
-        <label asp-for="QuantiteEnStock"></label>
-        <input asp-for="QuantiteEnStock" />
-        <span asp-validation-for="QuantiteEnStock" style="color:red"></span>
-    </div>
-
-    <div>
-        <label asp-for="SeuilAlerte"></label>
-        <input asp-for="SeuilAlerte" />
-        <span asp-validation-for="SeuilAlerte" style="color:red"></span>
-    </div>
-
-    <div>
-        <label asp-for="CategorieId"></label>
-        @* asp-items lie la liste déroulante au ViewBag.CategorieId *@
-        <select asp-for="CategorieId" asp-items="ViewBag.CategorieId">
-            <option value="">-- Choisir une catégorie --</option>
-        </select>
-        <span asp-validation-for="CategorieId" style="color:red"></span>
-    </div>
-
-    <div>
-        <label asp-for="Actif"></label>
-        <input asp-for="Actif" type="checkbox" />
-    </div>
-
-    <hr />
-    <button type="submit">Enregistrer</button>
-    <a asp-action="Index">Annuler</a>
-</form>
+</div>

@@ -1,47 +1,45 @@
-@model IEnumerable<Categorie>
+@model IEnumerable<GestionStock.Models.Categorie>
 @{
     ViewData["Title"] = "Catégories";
 }
 
-<h1>Catégories</h1>
-<a asp-action="Create">+ Nouvelle catégorie</a>
-
-<hr />
-
-@if (TempData["Erreur"] != null)
-{
-    <p style="color:red">@TempData["Erreur"]</p>
-}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Catégories</h2>
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Create" class="btn btn-primary">Nouvelle catégorie</a>
+    }
+</div>
 
 @if (!Model.Any())
 {
-    <p>Aucune catégorie trouvée.</p>
+    <div class="alert alert-info">Aucune catégorie trouvée.</div>
 }
 else
 {
-    <table border="1" cellpadding="5">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Nombre de produits</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var categorie in Model)
-            {
-                <tr>
-                    <td>@categorie.Nom</td>
-                    <td>@categorie.Description</td>
-                    <td>@categorie.Produits.Count</td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@categorie.Id">Détails</a> |
-                        <a asp-action="Edit" asp-route-id="@categorie.Id">Modifier</a> |
-                        <a asp-action="Delete" asp-route-id="@categorie.Id">Supprimer</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="row g-3">
+        @foreach (var categorie in Model)
+        {
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@categorie.Nom</h5>
+                        <p class="card-text text-muted">@categorie.Description</p>
+                        <span class="badge bg-primary">@categorie.Produits.Count produit(s)</span>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <a asp-action="Details" asp-route-id="@categorie.Id"
+                           class="btn btn-sm btn-outline-info">Détails</a>
+                        @if (User.Identity != null && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@categorie.Id"
+                               class="btn btn-sm btn-outline-warning">Modifier</a>
+                            <a asp-action="Delete" asp-route-id="@categorie.Id"
+                               class="btn btn-sm btn-outline-danger">Supprimer</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 }

@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = "Administration";
+    var usersAvecRoles = ViewBag.UsersAvecRoles as List<(GestionStock.Models.AppUser User, IList<string> Roles)>;
+}
+
+<h1>Administration</h1>
+
+<p>Total utilisateurs : <strong>@ViewBag.TotalUsers</strong></p>
+<p>Total admins : <strong>@ViewBag.TotalAdmins</strong></p>
+
+<hr />
+
+<h2>Gestion des utilisateurs</h2>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Rôle actuel</th>
+            <th>Statut</th>
+            <th>Inscription</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in usersAvecRoles!)
+        {
+            <tr>
+                <td>@item.User.Prenom @item.User.Nom</td>
+                <td>@item.User.Email</td>
+                <td>@string.Join(", ", item.Roles)</td>
+                <td>@(item.User.Actif ? "Actif" : "Inactif")</td>
+                <td>@item.User.DateInscription.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @* Changer le rôle *@
+                    <form asp-action="ChangerRole" method="post" style="display:inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="userId" value="@item.User.Id" />
+                        <select name="role">
+    @foreach (var r in new[] { "Admin", "Employe" })
+    {
+        if (item.Roles.Contains(r))
+        {
+            <option value="@r" selected>@r</option>
+        }
+        else
+        {
+            <option value="@r">@r</option>
+        }
+    }
+</select>
+                        <button type="submit">Changer rôle</button>
+                    </form>
+
+                    @* Activer / Désactiver *@
+                    <form asp-action="ActiverDesactiver" method="post" style="display:inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="userId" value="@item.User.Id" />
+                        <button type="submit">
+                            @(item.User.Actif ? "Désactiver" : "Activer")
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

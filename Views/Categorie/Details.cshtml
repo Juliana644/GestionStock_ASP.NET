@@ -1,54 +1,60 @@
-@model Categorie
+@model GestionStock.Models.Categorie
 @{
     ViewData["Title"] = "Détails de la catégorie";
 }
 
-<h1>@Model.Nom</h1>
-<a asp-action="Index">← Retour à la liste</a> |
-<a asp-action="Edit" asp-route-id="@Model.Id">Modifier</a>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0"> @Model.Nom</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Description :</strong> @Model.Description</p>
+                <p><strong>Nombre de produits :</strong>
+                    <span class="badge bg-primary">@Model.Produits.Count</span>
+                </p>
+            </div>
+            <div class="card-footer d-flex gap-2">
+                <a asp-action="Index" class="btn btn-outline-secondary">← Retour</a>
+                @if (User.Identity != null && User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Modifier</a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Supprimer</a>
+                }
+            </div>
+        </div>
 
-<hr />
-
-<dl>
-    <dt>Nom</dt>
-    <dd>@Model.Nom</dd>
-
-    <dt>Description</dt>
-    <dd>@Model.Description</dd>
-
-    <dt>Nombre de produits</dt>
-    <dd>@Model.Produits.Count</dd>
-</dl>
-
-<hr />
-
-<h2>Produits dans cette catégorie</h2>
-
-@if (!Model.Produits.Any())
-{
-    <p>Aucun produit dans cette catégorie.</p>
-}
-else
-{
-    <table border="1" cellpadding="5">
-        <thead>
-            <tr>
-                <th>Référence</th>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>Stock</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var produit in Model.Produits)
-            {
-                <tr>
-                    <td>@produit.Reference</td>
-                    <td>@produit.Nom</td>
-                    <td>@produit.PrixUnitaire.ToString("N0") FCFA</td>
-                    <td>@produit.QuantiteEnStock</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        @if (Model.Produits.Any())
+        {
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    Produits dans cette catégorie
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Référence</th>
+                                <th>Nom</th>
+                                <th>Prix</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var produit in Model.Produits)
+                            {
+                                <tr>
+                                    <td><span class="badge bg-secondary">@produit.Reference</span></td>
+                                    <td>@produit.Nom</td>
+                                    <td>@produit.PrixUnitaire.ToString("N0") FCFA</td>
+                                    <td>@produit.QuantiteEnStock</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>

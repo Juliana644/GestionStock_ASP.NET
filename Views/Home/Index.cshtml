@@ -1,46 +1,87 @@
-﻿@model IEnumerable<Produit>
+﻿@model IEnumerable<GestionStock.Models.Produit>
 @{
     ViewData["Title"] = "Tableau de bord";
 }
 
-<h1>Tableau de bord</h1>
+<h2 class="mb-4">📊 Tableau de bord</h2>
 
-<p>Total produits : <strong>@ViewBag.TotalProduits</strong></p>
-<p>Total catégories : <strong>@ViewBag.TotalCategories</strong></p>
-<p>Total mouvements : <strong>@ViewBag.TotalMouvements</strong></p>
-<p>Produits en stock faible : <strong>@ViewBag.StockFaible</strong></p>
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">@ViewBag.TotalProduits</h3>
+                <p class="card-text">Produits</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">@ViewBag.TotalCategories</h3>
+                <p class="card-text">Catégories</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">@ViewBag.TotalMouvements</h3>
+                <p class="card-text">Mouvements</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-danger h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">@ViewBag.StockFaible</h3>
+                <p class="card-text">Stock critique</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<hr />
-
-<h2>Produits en stock critique</h2>
-
-@if (!Model.Any())
-{
-    <p>Aucun produit en stock critique.</p>
-}
-else
-{
-    <table border="1" cellpadding="5">
-        <thead>
-            <tr>
-                <th>Référence</th>
-                <th>Nom</th>
-                <th>Catégorie</th>
-                <th>Stock</th>
-                <th>Seuil</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var produit in Model)
-            {
-                <tr>
-                    <td>@produit.Reference</td>
-                    <td>@produit.Nom</td>
-                    <td>@produit.Categorie?.Nom</td>
-                    <td style="color:red">@produit.QuantiteEnStock</td>
-                    <td>@produit.SeuilAlerte</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-} 
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        ⚠️ Produits en stock critique
+    </div>
+    <div class="card-body p-0">
+        @if (!Model.Any())
+        {
+            <p class="p-3 mb-0 text-muted">Aucun produit en stock critique.</p>
+        }
+        else
+        {
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Référence</th>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Stock</th>
+                        <th>Seuil</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var produit in Model)
+                    {
+                        <tr>
+                            <td><span class="badge bg-secondary">@produit.Reference</span></td>
+                            <td>@produit.Nom</td>
+                            <td>@produit.Categorie?.Nom</td>
+                            <td><span class="badge bg-danger">@produit.QuantiteEnStock</span></td>
+                            <td>@produit.SeuilAlerte</td>
+                            <td>
+                                <a asp-controller="Produit" asp-action="Details"
+                                   asp-route-id="@produit.Id"
+                                   class="btn btn-sm btn-outline-primary">
+                                    Voir
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

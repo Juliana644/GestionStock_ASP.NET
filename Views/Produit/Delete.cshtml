@@ -1,29 +1,34 @@
-@model Produit
+@model GestionStock.Models.Produit
 @{
     ViewData["Title"] = "Supprimer le produit";
 }
 
-<h1>Supprimer ce produit ?</h1>
-
-<p>Tu es sur le point de supprimer définitivement ce produit :</p>
-
-<dl>
-    <dt>Référence</dt>
-    <dd>@Model.Reference</dd>
-
-    <dt>Nom</dt>
-    <dd>@Model.Nom</dd>
-
-    <dt>Catégorie</dt>
-    <dd>@Model.Categorie?.Nom</dd>
-
-    <dt>Stock actuel</dt>
-    <dd>@Model.QuantiteEnStock</dd>
-</dl>
-
-<form asp-action="Delete" method="post">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="Id" />
-    <button type="submit">Oui, supprimer</button>
-    <a asp-action="Index">Annuler</a>
-</form>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h4 class="mb-0">Supprimer ce produit ?</h4>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Tu es sur le point de supprimer définitivement :</p>
+                <table class="table table-borderless">
+                    <tr><th>Référence</th><td>@Model.Reference</td></tr>
+                    <tr><th>Nom</th><td>@Model.Nom</td></tr>
+                    <tr><th>Catégorie</th><td>@Model.Categorie?.Nom</td></tr>
+                    <tr><th>Stock actuel</th><td>@Model.QuantiteEnStock</td></tr>
+                </table>
+                <div class="alert alert-warning">
+                    Cette action est irréversible.
+                </div>
+            </div>
+            <div class="card-footer d-flex gap-2">
+                <form asp-action="Delete" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+                </form>
+                <a asp-action="Index" class="btn btn-outline-secondary">Annuler</a>
+            </div>
+        </div>
+    </div>
+</div>

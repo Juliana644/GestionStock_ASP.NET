@@ -34,6 +34,20 @@ public class HomeController : Controller
         return View(produitsCritiques.Take(5));
     }
 
+    // Page 403 - Accès refusé
+    public IActionResult Acces403()
+    {
+        Response.StatusCode = 403;
+        return View();
+    }
+
+    // Page 404 - Introuvable
+    public IActionResult Introuvable()
+    {
+        Response.StatusCode = 404;
+        return View();
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

@@ -1,34 +1,106 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GestionStock</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <nav>
-        <a asp-controller="Home" asp-action="Index">Accueil</a> |
-        <a asp-controller="Produit" asp-action="Index">Produits</a> |
-        <a asp-controller="Categorie" asp-action="Index">Catégories</a>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
+                GestionStock
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Produit" asp-action="Index">Produits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Categorie" asp-action="Index">Catégories</a>
+                    </li>
+                    @if (User.Identity != null && User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-warning"
+                               asp-controller="Admin" asp-action="Index">
+                                Administration
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <span class="nav-link text-light">
+                                @User.Identity.Name
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <form asp-controller="Account" asp-action="Logout"
+                                  method="post" style="display:inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-outline-light btn-sm mt-1">
+                                    Se déconnecter
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">
+                                Se connecter
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary btn-sm mt-1"
+                               asp-controller="Account" asp-action="Register">
+                                S'inscrire
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
     </nav>
 
-    <hr />
-
-    <main>
-        @* Affichage des messages de succès (TempData) *@
+    <div class="container mt-4">
         @if (TempData["Succes"] != null)
         {
-            <p style="color:green">@TempData["Succes"]</p>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Succes"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+        @if (TempData["Erreur"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["Erreur"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
         }
 
         @RenderBody()
-    </main>
+    </div>
 
-    <hr />
-    <footer>
-        <p>GestionStock &copy; @DateTime.Now.Year</p>
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p class="mb-0">GestionStock &copy; @DateTime.Now.Year</p>
     </footer>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

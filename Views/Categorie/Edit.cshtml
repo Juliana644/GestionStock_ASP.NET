@@ -1,32 +1,37 @@
-@model Categorie
+@model GestionStock.Models.Categorie
 @{
     ViewData["Title"] = "Modifier la catégorie";
 }
 
-<h1>Modifier : @Model.Nom</h1>
-<a asp-action="Index">← Retour à la liste</a>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h4 class="mb-0"> Modifier : @Model.Nom</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
-<hr />
+                    <div class="mb-3">
+                        <label asp-for="Nom" class="form-label"></label>
+                        <input asp-for="Nom" class="form-control" />
+                        <span asp-validation-for="Nom" class="text-danger small"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
 
-<form asp-action="Edit" method="post">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="Id" />
-
-    <div asp-validation-summary="ModelOnly" style="color:red"></div>
-
-    <div>
-        <label asp-for="Nom"></label>
-        <input asp-for="Nom" />
-        <span asp-validation-for="Nom" style="color:red"></span>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-warning">Enregistrer les modifications</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description"></textarea>
-        <span asp-validation-for="Description" style="color:red"></span>
-    </div>
-
-    <hr />
-    <button type="submit">Enregistrer les modifications</button>
-    <a asp-action="Index">Annuler</a>
-</form>
+</div>

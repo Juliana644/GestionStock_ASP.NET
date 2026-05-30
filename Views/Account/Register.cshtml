@@ -1,0 +1,57 @@
+@model GestionStock.ViewModels.RegisterDto
+@{
+    ViewData["Title"] = "Inscription";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white text-center">
+                <h4 class="mb-0">📝 Créer un compte</h4>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Register" method="post">
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Prenom" class="form-label"></label>
+                            <input asp-for="Prenom" class="form-control" />
+                            <span asp-validation-for="Prenom" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Nom" class="form-label"></label>
+                            <input asp-for="Nom" class="form-control" />
+                            <span asp-validation-for="Nom" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" type="email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Mot de passe</label>
+                            <input asp-for="MotDePasse" type="password" class="form-control" />
+                            <span asp-validation-for="MotDePasse" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Confirmer le mot de passe</label>
+                            <input asp-for="ConfirmationMotDePasse" type="password" class="form-control" />
+                            <span asp-validation-for="ConfirmationMotDePasse" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary">Créer le compte</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <small>Déjà un compte ?
+                    <a asp-action="Login">Se connecter</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
